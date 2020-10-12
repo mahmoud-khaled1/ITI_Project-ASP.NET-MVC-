@@ -1,0 +1,2 @@
+# ITI_Project-ASP.NET-MVC-
+The main theme of this thesis was to develop an Online Car Selling Application  by  ASP.NET application developed with a built-in Visual Studio environment. This application is basically organized in a bipartite in terms of functions: products (cars) and customers. Online Car Selling  was devised to offer large opportunities to customers, case of selling and managing.: For the product, it gives a large view of current events to customers.
