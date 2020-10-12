@@ -1,0 +1,61 @@
+﻿@model Shoping.Models.category
+@{
+    ViewBag.Title = "create";
+    Layout="~/Views/Shared/_adminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/Content/LoginCSS.css">
+    <title> Login </title>
+    <style media="screen">
+         body 
+         {
+            background-color: skyblue;
+          }
+
+    </style>
+</head>
+<body>
+    <div class="create new category">
+        <div class="loginbox">
+            @*<img class="avatar" src="~/Content/images/car_icon.jpg" alt="">*@
+            <h1>Add new Category</h1>
+            @*<form class="login_form" action="login" method="post">*@
+            @using (Html.BeginForm("create","Admin",FormMethod.Post,new { enctype="multipart/form-data"}))
+            {
+
+                @Html.LabelFor(ca => ca.cat_name)
+                @Html.EditorFor(ca => ca.cat_name, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Category name" } })
+                @Html.ValidationMessageFor(ca => ca.cat_name, null, new { @class = "text-danger" })
+
+                @Html.LabelFor(ca => ca.cat_image)<br />
+                <input type="file" name="imgfile" id="imgfile" class="form-control" required="required" />
+
+                <input type="submit" name="submit" value="ADD"> <br>
+               
+
+                if (ViewBag.error != null)
+                {
+                    <div style="color:red">@ViewBag.error</div>
+                }
+  
+            }
+     
+        </div>
+        <div class="copyrightt">
+            copyright &copy 2020 'MK'
+       </div>
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

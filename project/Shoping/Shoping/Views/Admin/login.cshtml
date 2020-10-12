@@ -1,0 +1,68 @@
+﻿@model Shoping.Models.admin
+@{
+    ViewBag.Title = "login";
+    Layout="~/Views/Shared/_adminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/Content/LoginCSS.css">
+    <title> Login </title>
+    <style media="screen">
+         body
+         {
+            background-color: skyblue;
+         }
+    </style>
+</head>
+<body>
+    <div class="loginbox">
+        <img class="avatar" src="~/Content/images/car_icon.jpg" alt="">
+        <h1>SignIn as adminstrator</h1>
+        @*<form class="login_form" action="login" method="post">*@
+        @using (Html.BeginForm())
+        {
+
+
+            @Html.LabelFor(adm => adm.ad_username)
+            @Html.EditorFor(adm => adm.ad_username, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Username" } })
+            @Html.ValidationMessageFor(adm => adm.ad_username, null, new { @class = "text-danger" })
+
+            @Html.LabelFor(adm => adm.ad_password)
+            @Html.EditorFor(adm => adm.ad_password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Password" } })
+            @Html.ValidationMessageFor(adm => adm.ad_password, null, new { @class = "text-danger" })
+
+            if (ViewBag.error != null)
+            {
+                <div style="color:red">@ViewBag.error</div>
+            }
+
+            <input type="submit" name="submit" value="Login"> <br>
+            <a href="#">forget your password ?</a> <br>
+            <a href="#">Don't have an account</a> <br>
+        }
+
+        @*<p>Username</p>
+            <input type="text" name="username" value="" placeholder="Enter Username">
+            <p>Password</p>
+            <input type="password" name="password" value="" placeholder="Enter Password">
+            <input type="submit" name="submit" value="Login"> <br>
+            <a href="#">forget your password ?</a> <br>
+            <a href="#">Don't have an account</a> <br>*@
+        @*</form>*@
+    </div>
+    <div class="copyrightt">
+        copyright &copy 2020 'MK'
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

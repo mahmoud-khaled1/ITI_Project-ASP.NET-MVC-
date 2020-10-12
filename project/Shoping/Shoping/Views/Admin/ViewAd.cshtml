@@ -1,0 +1,64 @@
+﻿@model Shoping.Models.Adviewmodel
+@{
+    ViewBag.Title = "ViewAd";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<style>
+    td {
+        padding: 20px;
+    }
+      body{
+        background-color: skyblue;
+    }
+        
+</style>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        @*<img src="~/Content/images/Car_background.jpg" class="img img-responsive" style="width:100%;height:150px"*@ />
+    </div>
+</div>
+
+<div class="row">
+
+    @*<div class="col-lg-2 col-md-2">
+        <img src="~/Content/images/g1.gif" class="img img-responsive" style=" height:1000px;" />
+    </div>*@
+
+
+
+    <div class="col-lg-8 col-md-8">
+
+        <div>
+            <h1 style="margin-top:80px;">b>@Model.pro_name </b> @*<small>AD-ID:@Model.pro_id</small>*@</h1>
+        </div>
+
+        <img src="@Url.Content(@Model.pro_image)" style=" width: 800PX; height: 500PX; border-radius:70px;image-rendering:auto;" />
+
+        <div>
+            <h1><b>Description</b></h1>
+            <p>@Model.pro_des</p>
+        </div>
+
+        <table>
+
+            <tr> <td><b>Price</b> </td> <td>@Model.pro_price </td> </tr>
+            <tr> <td><b>Category</b> </td> <td>@Model.cat_name </td> </tr>
+            @*<tr> <td>Posted by: </td> <td>@Model.u_name*@ @*<img src="@Url.Content(@Model.u_image)" style="width:40px; height:40px" />*@ </td> </tr>
+            @*<tr> <td>Contact: </td> <td>@Model.u_contact  </td> </tr>*@
+            <tr>
+                <td colspan="2">                    
+                        @Html.ActionLink("Delete Product", "DeleteAd", new { @class = "btn btn-info", id = Model.pro_id })
+
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="col-lg-2 col-md-2">
+        @*<img src="~/Content/images/g2.gif" class="img img-responsive" style=" height:500px;" />*@
+    </div>
+
+
+</div>

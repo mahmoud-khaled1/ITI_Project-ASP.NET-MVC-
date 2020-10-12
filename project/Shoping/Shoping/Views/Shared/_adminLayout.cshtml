@@ -1,0 +1,84 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .na {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+
+    <title>@Page.Title</title>
+    @RenderSection("head", required: false)
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                @if (Session["ad_id"] != null)
+                {
+                    <a class="navbar-brand" href="#">@Session["name"]</a>
+                }
+                else
+                {
+                    <a class="navbar-brand" href="#">Noname</a>
+                }
+            </div>
+            <ul class="nav navbar-nav">
+                @if (Session["ad_id"] != null)
+                {
+                    <li>@Html.ActionLink(" show Categories", "ViewCategory", "admin", null, new { @class = "ht" })</li>
+                }
+                <li>
+                    @if (Session["ad_id"] != null)
+                    {
+                        @Html.ActionLink("Add new Product", "CreatedAd", "admin", null, new { @class = "ht" })
+
+                    }
+                </li>
+                <li>
+                    @if (Session["ad_id"] != null)
+                    {
+                        @Html.ActionLink("Add new Category", "create", "admin", null, new { @class = "ht" })
+
+                    }
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    @if (Session["ad_id"] == null)
+                    {
+
+                        @Html.ActionLink("Sign In", "login", "admin", null, new { @class = "ht", })
+
+                    }
+                </li>
+                <li>
+                    @if (Session["ad_id"] == null)
+                    {
+                        @Html.ActionLink("Sign Up", "SignUp", "admin", null, new { @class = "ht" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Sign Out", "Signout", "admin", null, new { @class = "ht" })
+                    }
+
+                <li>
+            </ul>
+        </div>
+
+
+    </nav>
+
+    @RenderBody()
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

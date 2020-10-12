@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c7d5670b00b64565b020d6070f9393c2" Name="Diagram1">
+        <EntityTypeShape EntityType="marketingModel.admin" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketingModel.category" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketingModel.product" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketingModel.userr" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="marketingModel.FK__category__cat_fk__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="marketingModel.FK__product__pro_fk___4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="marketingModel.FK__product__pro_fk___412EB0B6" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="marketingModel.sysdiagram" Width="1.5" PointX="5.375" PointY="4.75" />
+        <AssociationConnector Association="marketingModel.cat_fk_user" />
+        <EntityTypeShape EntityType="marketingModel.Reservation" Width="1.5" PointX="8.5" PointY="3.5" />
+        <AssociationConnector Association="marketingModel.pro_f_id" />
+        <AssociationConnector Association="marketingModel.u_f_id" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

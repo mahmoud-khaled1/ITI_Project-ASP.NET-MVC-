@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="marketingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="ad_id" />
+    </Key>
+    <Property Name="ad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ad_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="categories" Relationship="Self.FK__category__cat_fk__3A81B327" FromRole="admin" ToRole="category" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cat_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cat_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cat_fk_ad" Type="Int32" />
+    <Property Name="cat_status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="admin" Relationship="Self.FK__category__cat_fk__3A81B327" FromRole="category" ToRole="admin" />
+    <NavigationProperty Name="products" Relationship="Self.FK__product__pro_fk___4222D4EF" FromRole="category" ToRole="product" />
+    <Property Name="cat_fk_user" Type="Int32" />
+    <NavigationProperty Name="userr" Relationship="marketingModel.cat_fk_user" FromRole="category" ToRole="userr" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="pro_id" />
+    </Key>
+    <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pro_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pro_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pro_price" Type="Int32" Nullable="false" />
+    <Property Name="pro_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pro_fk_userr" Type="Int32" />
+    <Property Name="pro_fk_cat" Type="Int32" />
+    <NavigationProperty Name="category" Relationship="Self.FK__product__pro_fk___4222D4EF" FromRole="product" ToRole="category" />
+    <NavigationProperty Name="userr" Relationship="Self.FK__product__pro_fk___412EB0B6" FromRole="product" ToRole="userr" />
+    <NavigationProperty Name="Reservations" Relationship="marketingModel.pro_f_id" FromRole="product" ToRole="Reservation" />
+  </EntityType>
+  <EntityType Name="userr">
+    <Key>
+      <PropertyRef Name="userr_id" />
+    </Key>
+    <Property Name="userr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userr_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userr_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userr_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userr_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userr_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="products" Relationship="Self.FK__product__pro_fk___412EB0B6" FromRole="userr" ToRole="product" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="categories" Relationship="marketingModel.cat_fk_user" FromRole="userr" ToRole="category" />
+    <NavigationProperty Name="Reservations" Relationship="marketingModel.u_f_id" FromRole="userr" ToRole="Reservation" />
+  </EntityType>
+  <Association Name="FK__category__cat_fk__3A81B327">
+    <End Role="admin" Type="Self.admin" Multiplicity="0..1" />
+    <End Role="category" Type="Self.category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="admin">
+        <PropertyRef Name="ad_id" />
+      </Principal>
+      <Dependent Role="category">
+        <PropertyRef Name="cat_fk_ad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product__pro_fk___4222D4EF">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="pro_fk_cat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product__pro_fk___412EB0B6">
+    <End Role="userr" Type="Self.userr" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userr">
+        <PropertyRef Name="userr_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="pro_fk_userr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="marketingEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="userrs" EntityType="Self.userr" />
+    <AssociationSet Name="FK__category__cat_fk__3A81B327" Association="Self.FK__category__cat_fk__3A81B327">
+      <End Role="admin" EntitySet="admins" />
+      <End Role="category" EntitySet="categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product__pro_fk___4222D4EF" Association="Self.FK__product__pro_fk___4222D4EF">
+      <End Role="category" EntitySet="categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product__pro_fk___412EB0B6" Association="Self.FK__product__pro_fk___412EB0B6">
+      <End Role="userr" EntitySet="userrs" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="marketingModel.sysdiagram" />
+    <AssociationSet Name="cat_fk_user" Association="marketingModel.cat_fk_user">
+      <End Role="userr" EntitySet="userrs" />
+      <End Role="category" EntitySet="categories" />
+    </AssociationSet>
+    <EntitySet Name="Reservations" EntityType="marketingModel.Reservation" />
+    <AssociationSet Name="pro_f_id" Association="marketingModel.pro_f_id">
+      <End Role="product" EntitySet="products" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="u_f_id" Association="marketingModel.u_f_id">
+      <End Role="userr" EntitySet="userrs" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="cat_fk_user">
+    <End Type="marketingModel.userr" Role="userr" Multiplicity="0..1" />
+    <End Type="marketingModel.category" Role="category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userr">
+        <PropertyRef Name="userr_id" />
+      </Principal>
+      <Dependent Role="category">
+        <PropertyRef Name="cat_fk_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="reser_id" />
+    </Key>
+    <Property Name="reser_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reser_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="user_fk_id" Type="Int32" Nullable="false" />
+    <Property Name="product_fk_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="product" Relationship="marketingModel.pro_f_id" FromRole="Reservation" ToRole="product" />
+    <NavigationProperty Name="userr" Relationship="marketingModel.u_f_id" FromRole="Reservation" ToRole="userr" />
+  </EntityType>
+  <Association Name="pro_f_id">
+    <End Type="marketingModel.product" Role="product" Multiplicity="1" />
+    <End Type="marketingModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="pro_id" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="product_fk_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="u_f_id">
+    <End Type="marketingModel.userr" Role="userr" Multiplicity="1" />
+    <End Type="marketingModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userr">
+        <PropertyRef Name="userr_id" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="user_fk_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

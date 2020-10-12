@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Shoping.Models.Reservation>
+
+@{
+    ViewBag.Title = "cart";
+}
+
+<h2>cart</h2>
+ <style>
+     body{
+        background-color: skyblue;
+    }
+ </style>
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.product.pro_name)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model =>model.product.pro_name)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.pro_image)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.product.pro_price)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.product.pro_description)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.pro_fk_userr)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.product.category.cat_name)
+        </th>
+        <th></th>
+    </tr>
+    @{ 
+        double total_price = 0.0;
+    }
+@foreach (var item in Model) {
+    total_price += item.product.pro_price;
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.pro_id)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.product.pro_name)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.pro_image)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.product.pro_price)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.product.pro_description)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.pro_fk_userr)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.product.category.cat_name)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+            @Html.ActionLink("Details", "ViewAd", new {  id=item.product.pro_id }) |
+            @Html.ActionLink("Delete", "Delete_from_cart", new {  id=item.reser_id  })
+        </td>
+    </tr>
+}
+
+</table>
+<div style="color: red">Total Price : @total_price</div>
